@@ -49,7 +49,7 @@ export class FlightService {
       .set('Accept', 'application/json');
 
     const reqObj = {params, headers};
-    return this.http.get<Flight[]>(url, reqObj).pipe(delay(3000))
+    return this.http.get<Flight[]>(url, reqObj); //.pipe(delay(3000))
     // return of(flights).pipe(delay(this.reqDelay))
 
   }

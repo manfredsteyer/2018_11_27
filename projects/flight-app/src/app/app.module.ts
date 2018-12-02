@@ -27,7 +27,8 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlightBookingModule,
+   
+    // FlightBookingModule, // Don't import lazy modules here!
 
     FormsModule,
     ReactiveFormsModule,
@@ -36,6 +37,7 @@ import { environment } from '../environments/environment';
 
     FlightApiModule.forRoot(),
     SharedModule.forRoot(),
+    
     RouterModule.forRoot([...APP_ROUTES], {...APP_EXTRA_OPTIONS}),
     
     StoreModule.forRoot(reducers, { metaReducers }),

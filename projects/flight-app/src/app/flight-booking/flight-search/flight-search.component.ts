@@ -1,3 +1,5 @@
+import { FlightUpdated } from './../+state/flight-booking.actions';
+import { takeUntil, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {Component, OnInit} from '@angular/core';
 import {FlightService, Flight} from '@flight-workspace/flight-api';
@@ -63,7 +65,18 @@ export class FlightSearchComponent implements OnInit {
   }
 
   delay(): void {
-    this.flightService.delay();
+    
+    this.flights$.pipe(first()).subscribe(flights => {
+
+      const f = flights[0];
+      const oldDate = new Date(f.date);
+      const newDate = new Date(oldDate.getTime() + 1000 * 60 * 15);
+
+      const newFlight: Flight = {...f, date: newDate.toISOString() };
+      this.store.dispatch(new FlightUpdated({flight: newFlight}));
+
+    });
+
   }
 
 }

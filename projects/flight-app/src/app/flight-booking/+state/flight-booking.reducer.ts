@@ -26,11 +26,12 @@ export function reducer(state = initialState, action: FlightBookingActions): Fli
       const newFlights = action.payload.flights;
       return { ...state, flights: newFlights }
 
-    case FlightBookingActionTypes.FlightUpdated:
+    case FlightBookingActionTypes.FlightUpdated: {
       const newFlight = action.payload.flight;
-      // TODO: Update flight in store
-      return state;
+      const newFlights = state.flights.map(f => (f.id == newFlight.id) ? newFlight: f);
 
+      return { ...state, flights: newFlights };
+    }
     case FlightBookingActionTypes.FlightsLoad:
       return { ...state, flights: [] }
 
